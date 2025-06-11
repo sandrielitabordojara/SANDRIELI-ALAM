@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feliz Dia dos Namorados - Sandrieli & Alam</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom, #ffdddd, #ffaaaa);
+      color: black;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .carta-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #ffe4e1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 1s ease;
+    }
+
+    .carta {
+      width: 250px;
+      height: 250px;
+      background-color: transparent;
+      background-image: url('https://i.imgur.com/0pP8I2G.png'); /* imagem com coração e texto */
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding-bottom: 1rem;
+    }
+
+    .botao-abrir {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 1rem;
+      cursor: pointer;
+    }
+
+    header, .mensagem, .galeria, .controles-audio, footer {
+      display: none;
+    }
+
+    .heart {
+      position: fixed;
+      top: -10px;
+      font-size: 2rem;
+      color: pink;
+      animation: fall 5s linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+
+    .galeria {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 1rem;
+    }
+
+    .galeria img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 1rem;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .explosao {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #ff69b4;
+      color: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      font-size: 1.5rem;
+      animation: boom 0.6s ease-out;
+      z-index: 10000;
+    }
+
+    @keyframes boom {
+      0% { transform: scale(0.5) translate(-50%, -50%); opacity: 0; }
+      100% { transform: scale(1.2) translate(-50%, -50%); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="carta-container" id="cartaContainer">
+    <div class="carta">
+      <button class="botao-abrir" onclick="abrirCarta()">Abrir ❤️</button>
+    </div>
+  </div>
+
+  <header>Sandrieli & Alam ❤️</header>
+
+  <div class="mensagem">
+    <p class="extra">Feliz dia dos namorados!<br><br>MEU AMOR, com você, a vida é mais feliz, você é a melodia que toca no meu coração e a canção que me faz feliz.</p>
+    <button class="botao-explosao" onclick="explodirMensagem()">Clique aqui ❤️</button>
+  </div>
+
+  <div class="galeria">
+    <img src="casal1.jpeg" alt="Foto do casal 1">
+    <img src="casal2.jpeg" alt="Foto do casal 2">
+    <img src="casal3.jpeg" alt="Foto do casal 3">
+    <img src="casal4.jpeg" alt="Foto do casal 4">
+    <img src="casal5.jpeg" alt="Foto do casal 5">
+  </div>
+
+  <div class="controles-audio">
+    <button onclick="tocarAudio()">Tocar Música</button>
+    <button onclick="pausarAudio()">Pausar Música</button>
+  </div>
+
+  <audio id="musica" autoplay loop>
+    <source src="https://docs.google.com/uc?export=download&id=1BGk4hNc3ZvqSYHg9Xx_9DD4eHTuRU-rq" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <footer>
+    Música especial: Cheiro de Mar - José Jr
+  </footer>
+
+  <script>
+    function abrirCarta() {
+      document.getElementById('cartaContainer').style.display = 'none';
+      document.querySelector('header').style.display = 'block';
+      document.querySelector('.mensagem').style.display = 'block';
+      document.querySelector('.galeria').style.display = 'flex';
+      document.querySelector('.controles-audio').style.display = 'block';
+      document.querySelector('footer').style.display = 'block';
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.textContent = '💖';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 10000);
+    }
+    setInterval(createHeart, 300);
+
+    function explodirMensagem() {
+      const msg = document.createElement('div');
+      msg.className = 'explosao';
+      msg.innerText = 'EU TE AMO PATODAVIDA!';
+      document.body.appendChild(msg);
+      setTimeout(() => msg.remove(), 1500);
+    }
+
+    function tocarAudio() {
+      document.getElementById('musica').play();
+    }
+
+    function pausarAudio() {
+      document.getElementById('musica').pause();
+    }
+  </script>
+</body>
+</html>
